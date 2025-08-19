@@ -1,0 +1,43 @@
+services:
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+
+  postgres-owner:
+    image: postgres:14
+    container_name: pg-owner
+    restart: always
+    environment:
+      POSTGRES_DB: ownerdb
+      POSTGRES_USER: owneruser
+      POSTGRES_PASSWORD: ownerpass
+    ports:
+      - "5433:5432"
+
+  postgres-pet:
+    image: postgres:14
+    container_name: pg-pet
+    restart: always
+    environment:
+      POSTGRES_DB: petdb
+      POSTGRES_USER: petuser
+      POSTGRES_PASSWORD: petpass
+    ports:
+      - "5434:5432"
+
+  postgres-web:
+    image: postgres:14
+    container_name: pg-web
+    restart: always
+    environment:
+      POSTGRES_DB: webdb
+      POSTGRES_USER: webuser
+      POSTGRES_PASSWORD: webpass
+    ports:
+      - "5435:5432"
